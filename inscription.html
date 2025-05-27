@@ -152,6 +152,17 @@
             localStorage.setItem('userInfo', JSON.stringify(userInfo));
             window.location.href = 'info.html'; // Redirige vers la page profil
         }
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js"; import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js"; import { getDatabase,
+            ref, set } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js"; const firebaseConfig = { apiKey: "AIzaSyBu6ITVj8ubtx0BuqEGF5_YUETuTolY9Fs", authDomain: "inscriptionetconnexion-82356.firebaseapp.com", projectId: "inscriptionetconnexion-82356",
+            storageBucket: "inscriptionetconnexion-82356.appspot.com", messagingSenderId: "688352080824", appId: "1:688352080824:web:b0b029da1cd905807ed54d", measurementId: "G-L005HQ97Y0", databaseURL: "https://inscriptionetconnexion-82356-default-rtdb.firebaseio.com"
+            }; const app = initializeApp(firebaseConfig); const auth = getAuth(app); const database = getDatabase(app); document.getElementById('inscriptionForm').addEventListener('submit', function(e) { e.preventDefault(); const nom = document.getElementById('nom').value.trim();
+            const email = document.getElementById('email').value.trim(); const password = document.getElementById('carte').value; if (!email || !password || !nom) { alert("Veuillez remplir tous les champs."); return; } createUserWithEmailAndPassword(auth,
+            email, password) .then((userCredential) => { const user = userCredential.user; set(ref(database, 'users/' + user.uid), { nom: nom, email: email }); alert("Inscription réussie !"); window.location.href = "info.html"; }) .catch((error) => {
+            alert("Erreur : " + error.message); }); }); document.getElementById('loginForm').addEventListener('submit', function(e) { e.preventDefault(); const email = document.getElementById('loginEmail').value.trim(); const password = document.getElementById('loginPassword').value;
+            if (!email || !password) { alert("Veuillez remplir tous les champs."); return; } signInWithEmailAndPassword(auth, email, password) .then((userCredential) => { alert("Connexion réussie !"); window.location.href = "info.html"; }) .catch((error)=>
+            { alert("Erreur de connexion : " + error.message); }); });
+        </script>
     </script>
 </body>
 </html>
