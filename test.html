@@ -204,7 +204,8 @@ h1{
     <div class="feature-box">
       <h3>Préservation des écosystèmes</h3>
       <p>Limiter la pollution préserve la biodiversité aquatique.</p>
-      <button><a href="arc4.html"><strong>Voir plus</strong>  </a></button>
+      <button onclick="incrementArticlesLus()"><a href="arc4.html"><strong>Voir plus</strong>  </a></button>
+      
     </div>
   </div>
 </section>
@@ -293,6 +294,17 @@ Nous vous contacterons bientôt au ${telephone} ou par email à ${email}.`;
       document.getElementById('confirmationMessage').textContent = "Veuillez remplir tous les champs.";
     }
   });
+
+
+
+function incrementArticlesLus() {
+  let count = parseInt(localStorage.getItem('articlesLus') || '0');
+  count++;
+  localStorage.setItem('articlesLus', count.toString());
+  alert("Article marqué comme lu !");
+}
+
+
 </script>
 
 </body>
