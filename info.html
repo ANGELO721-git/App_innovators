@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil - </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="profil.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-green-50 text-gray-800 font-sans pt-16">
+
+  <!-- Barre de navigation -->
+  <nav class="navbar fixed top-0 left-0 right-0 bg-green-800 text-white shadow-md z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="#" class="text-xl font-bold">AquaSante</a>
+      <ul class="flex space-x-6">
+        <li><a href="accueil2.html" class="hover:text-green-200 transition">Accueil</a></li>
+        
+      </ul>
+      
+    </div>
+  </nav>
+    
+  <!-- Contenu principal -->
+  <main class="max-w-xl mx-auto mt-10 bg-blue-100 p-6 rounded-lg shadow-lg">
+    <!-- Profil utilisateur -->
+    <div class="text-center">
+      <div class="relative inline-block">
+        <img id="profileImage" src="https://via.placeholder.com/100" class="mx-auto rounded-full mb-4 w-24 h-24 object-cover border-4 border-blue-200" alt="Photo de profil">
+        <button type="button" onclick="document.getElementById('imageUpload').click()" class="absolute bottom-0 right-0 bg-blue-600 text-white rounded-full p-2 hover:bg-blue-700 transition" aria-label="Changer la photo de profil">
+          <i class="fas fa-camera"></i>
+        </button>
+        <input type="file" id="imageUpload" accept="image/*" class="hidden" aria-label="Télécharger une nouvelle photo de profil">
+      </div>
+    </div>
+
+    <!-- Informations personnelles centrées -->
+<div class="mt-8 flex justify-center">
+  <div class="bg-blue-50 px-40 p-10 rounded-lg border border-blue-100 shadow-sm">
+    <h2 class="font-bold text-blue-700 mb-6 text-l border-b pb-1">Informations personnelles</h2>
+    <div class="userInfo space-y-2">
+      <p><strong>utilisateur:</strong> <span id="displayName"></span></p>
+      <p><strong>Email :</strong> <span id="displayEmail"></span></p>
+      <p><strong>Mot de passe :</strong> <span id="displayCard"></span></p>
+    </div>
+  </div>
+</div>
+
+  </main>
+
+  <!-- Dashboard -->
+  <main class="max-w-6xl mx-auto mt-10 px-4">
+   
+
+    
+   <!-- Bouton quiz centré -->
+<div class="mt-9 p-6 flex justify-center">
+  <a href="mise en situation.html" class="bg-blue-600 text-white px-6 py-4 rounded-lg text-center hover:bg-blue-700 transition flex items-center justify-center">
+    <i class="fas fa-question-circle mr-3"></i> Commencer le quiz d’aujourd’hui
+  </a>
+  <a href="" class="bg--600 text-white px-6 py-4 rounded-lg text-center hover:bg-white-700 transition flex items-center justify-center">
+    <i class="fas fa-question-circl mr-9"></i> 
+  </a>
+  <a href="hzzh.html" class="bg-blue-600 text-white px-6 py-4 rounded-lg text-center hover:bg-blue-700 transition flex items-center justify-center">
+    <i class="fas fa-question-circle mr-3"></i> Lieu important
+  </a>
+</div>
+<div>
+
+</div>
+  
+  </main>
+
+  <!-- Tableau de bord CO2 -->
+  
+      
+    </div>
+     <div class="grid grid-cols-1 md:grid-cols-3  gap-20" >
+      <!-- Statistiques Santé -->
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+        <div class="flex items-center mb-9">
+          <div class="bg-green-100 p-1C  rounded-full mr-4">
+            <i class="fas fa-brain text-green-600 text-xl"></i>
+          </div>
+          <h2 class="text-lg font-semibold text-green-700">Progrès </h2>
+        </div>
+        <p class="text-gray-600">Article lu : <strong id="quizCountDashboard">1</strong></p>
+        <div class="mt-4 w-full bg-gray-200 rounded-full h-2.5">
+          <div id="quizProgress" class="bg-green-600 h-2.5 rounded-full" style="width: 60%"></div>
+        </div>
+      </div>
+      <!-- Statistiques Eau -->
+
+
+      <!-- Statistiques Actions -->
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+        <div class="flex items-center mb-4">
+          <div class="bg-purple-100 p-3 rounded-full mr-4">
+            <i class="fas fa-leaf text-purple-600 text-xl"></i>
+          </div>
+          <h2 class="text-lg font-semibold text-purple-700">Acte</h2>
+        </div>
+        <p class="text-gray-600">Quiz complété : <strong id="challengesCompletedDashboard">0</strong></p>
+        <div class="mt-4 w-full bg-gray-200 rounded-full h-2.5">
+          <div id="challengesProgress" class="bg-purple-600 h-2.5 rounded-full" style="width: 40%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pied de page -->
+  <footer class="mt-12">
+    <div class="footer text-center py-4 text-gray-500">
+      <p>© 2025 AquaSante — Pour une eau propre et une santé durable.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+ 
+<script>
+    // Récupérer les infos de l'utilisateur et initialiser la page
+    document.addEventListener('DOMContentLoaded', function() {
+      const userData = JSON.parse(localStorage.getItem('userInfo'));
+      if (userData) {
+        document.getElementById('displayName').textContent = userData.nom || '';
+        document.getElementById('displayEmail').textContent = userData.email || '';
+        document.getElementById('displayCard').textContent = userData.carte || '';
+        if (userData.profileImage) {
+          document.getElementById('profileImage').src = userData.profileImage;
+        }
+      } else {
+        document.body.innerHTML = "<h2 class='text-center mt-20 text-xl'>Aucun utilisateur trouvé. Redirection...</h2>";
+        setTimeout(() => {
+          window.location.href = 'chat.html';
+        }, 3000);
+      }
+
+      // Upload image de profil
+      document.getElementById('imageUpload').addEventListener('change', function(e) {
+        if (e.target.files && e.target.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            document.getElementById('profileImage').src = event.target.result;
+            if (userData) {
+              userData.profileImage = event.target.result;
+              localStorage.setItem('userInfo', JSON.stringify(userData));
+              showThankYouMessage("Photo de profil mise à jour avec succès !");
+            }
+          };
+          reader.readAsDataURL(e.target.files[0]);
+        }
+      });
+
+      // Déconnexion
+      document.getElementById('logout').addEventListener('click', () => {
+        localStorage.removeItem('userInfo');
+        window.location.href = 'chat.html';
+      });
+    });
+
+    // Afficher un message de remerciement
+    function showThankYouMessage(message) {
+      const thankYouMessage = document.getElementById('thankYouMessage');
+      thankYouMessage.textContent = message;
+      thankYouMessage.classList.remove('hidden');
+      setTimeout(() => {
+        thankYouMessage.classList.add('hidden');
+      }, 3000);
+    }
+  
+</script>
+</body>
+</html>

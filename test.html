@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AquaSante - Eau et Santé</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background-color: #f4f9ff;
+      color: #003366;
+    }
+    header {
+      background: url('eau.jpg');
+      color: white;
+      padding: 100px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5em;
+    }
+    header p {
+      font-size: 1.2em;
+      margin: 20px 0;
+    }
+    .cta-button {
+      background-color: #0077cc;
+      color: white;
+      padding: 15px 30px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    section {
+      padding: 50px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .feature-box {
+      background: #e0f0ff;
+      padding: 20px;
+      border-radius: 8px;
+      flex: 1 1 45%;
+    }
+    .catalog {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .catalog-item {
+      flex: 1 1 45%;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    .catalog-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+    footer {
+      background: #003366;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    /* NAVIGATION STICKY */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #003366;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+.navbar-logo {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+}
+
+.navbar-links li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-links li a:hover {
+  color: #00ccff;
+}
+.filtre{
+  height: 20px;
+  width: 10px;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+.p {
+  font-size: 29px;
+}
+img{
+  height: 20px;
+}
+button{
+  background-color: #0077cc;
+  height: 40px;
+  width: 90px;
+  border-radius: 22px;
+}
+body {
+  padding-top: 70px; /* To avoid content under the navbar */
+  font-family: 'Times New Roman', Times, serif;
+}
+h1{
+  font-size: 40px;
+}
+.atelier-section {
+  background-color: #e0f7fa;
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 30px 0;
+}
+.atelier-button {
+  background-color: #009688;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 20px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+.atelier-button:hover {
+  background-color: #00796b;
+}
+
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar-container">
+    <a href="#accueil" class="navbar-logo">AquaSante</a>
+    <ul class="navbar-links">
+      <li><a href="test.html">Accueil</a></li>
+      
+      <li><a href="inscription.html">Inscription</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header>
+  <h1>Une eau propre, une vie saine</h1>
+  <p>Agissons ensemble pour l'assainissement de l'eau et la santé de tous.</p>
+  <a href="atelier.html" class="cta-button">Découvrir notre mission</a>
+</header>
+
+
+
+<section id="mission">
+  <h1>Pourquoi l'eau propre est essentielle ? </h1>
+  <div class="features">
+    <div class="feature-box">
+      <h3>Réduction des maladies hydriques</h3>
+      <p>L'accès à une eau propre diminue les maladies comme le choléra.</p>
+      <button><a href="arc1.html"><strong>Voir plus</strong>  </a></button>
+    </div>
+    <div onclick="" class="feature-box">
+      <h3>Amélioration de la santé publique</h3>
+      <p>L'assainissement réduit la charge sur les hôpitaux locaux.</p>
+      <button><a href="arc2.html"><strong>Voir plus</strong>  </a></button>
+    </div>
+    <div class="feature-box">
+      <h3>Protection des enfants et femmes enceintes</h3>
+      <p>Ces groupes sont les plus touchés par l'eau contaminée.</p>
+      <button><a href="arc3.html"><strong>Voir plus</strong>  </a></button>
+    </div>
+    <div class="feature-box">
+      <h3>Préservation des écosystèmes</h3>
+      <p>Limiter la pollution préserve la biodiversité aquatique.</p>
+      <button><a href="arc4.html"><strong>Voir plus</strong>  </a></button>
+    </div>
+  </div>
+</section>
+<section id="ateliers">
+  <div class="atelier-section">
+    <h2>Nos Ateliers Éducatifs</h2>
+    <p>Découvrez nos ateliers pratiques pour apprendre à purifier l'eau et adopter des habitudes saines.</p>
+    <a href="atelier.html" class="atelier-button">Voir nos ateliers</a>
+  </div>
+</section>
+<section id="campagne">
+  <h1>Participez à nos campagnes</h1>
+  <p>Rejoignez nos actions pour préserver l'eau et la santé de tous !</p>
+  <form id="campagneForm" style="background: #e0f7fa; padding: 20px; border-radius: 10px; max-width: 600px; margin: auto;">
+    
+    <label for="nom">Votre nom :</label><br>
+    <input type="text" id="nom" name="nom" required style="width: 100%; padding: 10px; margin: 10px 0;"><br>
+
+    <label for="ville">Votre ville :</label><br>
+    <input type="text" id="ville" name="ville" required style="width: 100%; padding: 10px; margin: 10px 0;"><br>
+
+    <label for="telephone">Numéro de téléphone :</label><br>
+    <input type="tel" id="telephone" name="telephone" required pattern="[0-9]{8,15}" style="width: 100%; padding: 10px; margin: 10px 0;" placeholder="Ex: 0700000000"><br>
+
+    <label for="email">Adresse email :</label><br>
+    <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; margin: 10px 0;"><br>
+
+    <label for="type">Choisissez une campagne :</label><br>
+    <select id="type" name="type" required style="width: 100%; padding: 10px; margin: 10px 0;">
+      <option value="">--Sélectionnez--</option>
+      <option value="Nettoyage de berges">Nettoyage de berges</option>
+      <option value="Sensibilisation dans les écoles">Sensibilisation dans les écoles</option>
+      <option value="Distribution de filtres à eau">Distribution de filtres à eau</option>
+    </select><br>
+
+    <button type="submit">Participer</button>
+  </form>
+  <p id="confirmationMessage" style="color: green; font-weight: bold; text-align: center; margin-top: 15px;"></p>
+</section>
+
+
+<section>
+  <h1>Actions simples</h1>
+  <div class="catalog">
+    <div class="catalog-item">
+      <img class="filtre" src="filtre.jpg" alt="Boire de l'eau filtrée">
+      <p class="p"><strong>Boire de l'eau filtrée</strong></p>
+    </div>
+    <div class="catalog-item">
+      <img src="puri.jpg" alt="Purification">
+      <p class="p"><strong>Utiliser des systèmes de purification accessibles</strong></p>
+    </div>
+    <div class="catalog-item">
+      <img src="Jeterjpg.jpg" alt="Ne pas jeter de produits chimiques">
+      <p class="p"><strong>Ne pas jeter de produits chimiques dans les égouts</strong></p>
+    </div>
+    <div class="catalog-item">
+      <img src="local.jpg" alt="Nettoyage de berges">
+      <p class="p"><strong>Participer à des campagnes locales de nettoyage</strong></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 AquaSante — Pour une eau propre et une santé durable.</p>
+</footer>
+
+<script>
+  document.getElementById('campagneForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const nom = document.getElementById('nom').value.trim();
+    const ville = document.getElementById('ville').value.trim();
+    const telephone = document.getElementById('telephone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const type = document.getElementById('type').value;
+
+    if (nom && ville && telephone && email && type) {
+      const message = `Merci ${nom} de ${ville} ! 
+Vous êtes inscrit(e) à la campagne "${type}". 
+Nous vous contacterons bientôt au ${telephone} ou par email à ${email}.`;
+      
+      document.getElementById('confirmationMessage').textContent = message;
+      this.reset();
+    } else {
+      document.getElementById('confirmationMessage').textContent = "Veuillez remplir tous les champs.";
+    }
+  });
+</script>
+
+</body>
+</html>

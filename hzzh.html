@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Itinéraire vers un lieu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    #map {
+      height: 75vh;
+      width: 100%;
+    }
+
+    .navbar {
+      background-color: #003366;
+      padding: 15px 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin-right: 15px;
+      font-weight: bold;
+    }
+
+    .search-container {
+      padding: 10px;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    #search {
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    #suggestions {
+      background-color: white;
+      border: 1px solid #ccc;
+      max-height: 200px;
+      overflow-y: auto;
+      position: absolute;
+      top: 70px;
+      width: calc(100% - 22px);
+      z-index: 1000;
+    }
+
+    #suggestions div {
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    #suggestions div:hover {
+      background-color: #eee;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      align-items: center;
+    }
+
+    select, button {
+      padding: 8px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <a href="#">AquaSante</a>
+    <div>
+      <a href="accueil2.html">Accueil</a>
+      <a href="info.html">Profil</a>
+    </div>
+  </div>
+
+  <div class="search-container">
+    <input type="text" id="search" placeholder="Rechercher un lieu (en Côte d'Ivoire)..." />
+    <div id="suggestions"></div>
+    <div class="controls">
+      <select id="transport">
+        <option value="car">Voiture</option>
+        <option value="foot">Marche</option>
+        <option value="bike">Vélo</option>
+      </select>
+      <button onclick="centrerSurMoi()">📍 Ma position</button>
+    </div>
+  </div>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+  <script>
+    const map = L.map('map').setView([5.336, -4.026], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    let userPosition = null;
+    let routingControl = null;
+    let userMarker = null;
+
+    // Fonction pour tracer l'itinéraire
+    function tracerItineraire(lat, lng) {
+      const profile = document.getElementById('transport').value;
+
+      if (!userPosition) {
+        alert("Position utilisateur inconnue.");
+        return;
+      }
+
+      if (routingControl) map.removeControl(routingControl);
+
+      routingControl = L.Routing.control({
+        waypoints: [
+          L.latLng(userPosition.lat, userPosition.lng),
+          L.latLng(lat, lng)
+        ],
+        router: L.Routing.osrmv1({ profile: profile }),
+        routeWhileDragging: false
+      }).addTo(map);
+    }
+
+    // Fonction pour centrer sur la position de l'utilisateur
+    function centrerSurMoi() {
+      if (!userPosition) {
+        alert("Position non détectée.");
+        return;
+      }
+      map.setView([userPosition.lat, userPosition.lng], 15);
+    }
+
+    // GÉOLOCALISATION
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          userPosition = {
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude
+          };
+          userMarker = L.marker(userPosition).addTo(map).bindPopup("Vous êtes ici").openPopup();
+          map.setView([userPosition.lat, userPosition.lng], 14);
+        },
+        err => {
+          alert("Géolocalisation échouée : " + err.message);
+        },
+        { enableHighAccuracy: true }
+      );
+    }
+
+    // RECHERCHE DE LIEUX
+    const searchInput = document.getElementById('search');
+    const suggestionsBox = document.getElementById('suggestions');
+
+    searchInput.addEventListener('input', async () => {
+      const query = searchInput.value.trim();
+      if (query.length < 3) {
+        suggestionsBox.innerHTML = '';
+        return;
+      }
+
+      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&countrycodes=ci&addressdetails=1&limit=5`;
+      const response = await fetch(url);
+      const results = await response.json();
+
+      suggestionsBox.innerHTML = '';
+      results.forEach(result => {
+        const div = document.createElement('div');
+        div.textContent = result.display_name;
+        div.addEventListener('click', () => {
+          searchInput.value = result.display_name;
+          suggestionsBox.innerHTML = '';
+          const lat = parseFloat(result.lat);
+          const lon = parseFloat(result.lon);
+          L.marker([lat, lon]).addTo(map).bindPopup(result.display_name).openPopup();
+          map.setView([lat, lon], 14);
+          tracerItineraire(lat, lon);
+        });
+        suggestionsBox.appendChild(div);
+      });
+    });
+
+    // Fermer les suggestions si on clique ailleurs
+    document.addEventListener('click', e => {
+      if (!suggestionsBox.contains(e.target) && e.target !== searchInput) {
+        suggestionsBox.innerHTML = '';
+      }
+    });
+  </script>
+</body>
+</html>
