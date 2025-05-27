@@ -1,80 +1,19 @@
 <!DOCTYPE html>
-   <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <!--=============== REMIXICONS ===============-->
-      <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!--=============== REMIXICONS ===============-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
-      <!--=============== CSS ===============-->
-      <link rel="stylesheet" href="chat.css">
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="chat.css">
 
-      <title>Angelo Web</title>
-   </head>
-   <body>
-      <div class="login">
-         <img src="inscrijpg.jpg" alt="login image" class="login__img">
-
-         <form action="" id="inscriptionForm">
-            <h5 class="login__title">Login</h5>
-
-            <div class="login__content">
-               <div class="login__box">
-                  <i class="ri-user-3-line login__icon"></i>
-
-                  <div class="form-group">
-                     <input type="text" required class="login__input" id="nom" placeholder=" ">
-                     <label for="nom" class="login__label">Nom d'utilisateur</label>
-                  </div>
-               </div>
-               <div class="login__box">
-                  <i class="ri-user-3-line login__icon"></i>
-
-                  <div class="form-group"> 
-                     <input type="email" required class="login__input" id="email" placeholder=" ">
-                     <label for="email" class="login__label">Email</label>
-                  </div>
-               </div>
-               
-        
-               <div class="login__box">
-                  <i class="ri-lock-2-line login__icon"></i>
-
-                  <div class="form-group">
-                     <input type="password" required class="login__input" id="carte" placeholder=" ">
-                     <label for="carte" class="login__label">Password</label>
-                     <i class="ri-eye-off-line login__eye" id="login-eye"></i>
-                  </div>
-               </div>
-            </div>
-
-            <div class="login__check">
-               <div class="login__check-group">
-                  <input type="checkbox" class="login__check-input" id="login-check">
-                  <label for="login-check" class="login__check-label">Remember me</label>
-               </div>
-
-               <a href="#" class="login__forgot">Forgot Password?</a>
-            </div>
-
-            <button type="submit" class="btn"  onclick="afficherMessage( Bienvenue )">Valider</button>
-
-           
-         
-         </form>
-
-  
-
-
-
+    <title>Angelo Web</title>
     <style>
-        
-      
         .container {
-            
             padding: 29px;
-           
             width: 100%;
             max-width: 400px;
             text-align: center;
@@ -85,32 +24,130 @@
         }
         input {
             width: 100%;
-            
-           
         }
-        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .modal-buttons {
+            margin-top: 20px;
+        }
+        .modal-buttons button {
+            margin: 0 10px;
+            padding: 8px 20px;
+            cursor: pointer;
+        }
     </style>
+</head>
+<body>
+    <div class="login">
+        <img src="inscrijpg.jpg" alt="login image" class="login__img">
 
-<script>
-function afficherMessage() {
-    document.getElementById("message").style.display = "block";
-}
-    document.getElementById('inscriptionForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+        <form action="" id="inscriptionForm">
+            <h5 class="login__title">Login</h5>
 
-        const userInfo = {
-            nom: document.getElementById('nom').value,
-            email: document.getElementById('email').value,
-           
-            carte: '***** ' + document.getElementById('carte').value.slice(-4) // Masquage des numéros
-        };
+            <div class="login__content">
+                <div class="login__box">
+                    <i class="ri-user-3-line login__icon"></i>
 
-        localStorage.setItem('userInfo', JSON.stringify(userInfo));
-        window.location.href = 'info.html'; // Redirige vers la page profil
-    });
-</script>
+                    <div class="form-group">
+                        <input type="text" required class="login__input" id="nom" placeholder=" ">
+                        <label for="nom" class="login__label">Nom d'utilisateur</label>
+                    </div>
+                </div>
+                <div class="login__box">
+                    <i class="ri-user-3-line login__icon"></i>
 
+                    <div class="form-group"> 
+                        <input type="email" required class="login__input" id="email" placeholder=" ">
+                        <label for="email" class="login__label">Email</label>
+                    </div>
+                </div>
+               
+                <div class="login__box">
+                    <i class="ri-lock-2-line login__icon"></i>
 
+                    <div class="form-group">
+                        <input type="password" required class="login__input" id="carte" placeholder=" ">
+                        <label for="carte" class="login__label">Password</label>
+                        <i class="ri-eye-off-line login__eye" id="login-eye"></i>
+                    </div>
+                </div>
+            </div>
 
+            <div class="login__check">
+                <div class="login__check-group">
+                    <input type="checkbox" class="login__check-input" id="login-check">
+                    <label for="login-check" class="login__check-label">Remember me</label>
+                </div>
+
+                <a href="#" class="login__forgot">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn">Valider</button>
+        </form>
+    </div>
+
+    <!-- Modal pour la question -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <h3>Souhaitez-vous recevoir des messages de notre part ?</h3>
+            <div class="modal-buttons">
+                <button id="btnOui">Oui</button>
+                <button id="btnNon">Non</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('inscriptionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Afficher la modal pour demander si l'utilisateur veut recevoir des messages
+            const modal = document.getElementById('messageModal');
+            modal.style.display = "block";
+            
+            // Gestion des boutons Oui/Non
+            document.getElementById('btnOui').addEventListener('click', function() {
+                // L'utilisateur a dit Oui, on enregistre ses infos et on redirige
+                enregistrerEtRediriger(true);
+                modal.style.display = "none";
+            });
+            
+            document.getElementById('btnNon').addEventListener('click', function() {
+                // L'utilisateur a dit Non, on redemande
+                alert("Nous vous redemandons car vous avez dit Non. Veuillez accepter pour continuer.");
+                // On ne ferme pas la modal, elle reste affichée jusqu'à ce qu'il dise Oui
+            });
+        });
+        
+        function enregistrerEtRediriger(accepteMessages) {
+            const userInfo = {
+                nom: document.getElementById('nom').value,
+                email: document.getElementById('email').value,
+                carte: '***** ' + document.getElementById('carte').value.slice(-4), // Masquage des numéros
+                accepteMessages: accepteMessages
+            };
+
+            localStorage.setItem('userInfo', JSON.stringify(userInfo));
+            window.location.href = 'info.html'; // Redirige vers la page profil
+        }
+    </script>
 </body>
 </html>
