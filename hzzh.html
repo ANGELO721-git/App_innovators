@@ -101,6 +101,9 @@
         <option value="bike">Vélo</option>
       </select>
       <button onclick="centrerSurMoi()">📍 Ma position</button>
+      <button onclick="afficherLieuxProximite('hospital')">🏥 Hôpitaux</button>
+<button onclick="afficherLieuxProximite('water')">💧 Coins d'eau</button>
+
     </div>
   </div>
 
@@ -206,6 +209,58 @@
         suggestionsBox.innerHTML = '';
       }
     });
+    const lieuxMarkers = [];
+
+function afficherLieuxProximite(type) {
+  if (!userPosition) {
+    alert("Veuillez d'abord activer la géolocalisation.");
+    return;
+  }
+
+  // Supprimer les anciens marqueurs
+  lieuxMarkers.forEach(marker => map.removeLayer(marker));
+  lieuxMarkers.length = 0;
+
+  let overpassQuery = "";
+  if (type === "hospital") {
+    overpassQuery = 'node(around:2000,' + userPosition.lat + ',' + userPosition.lng + ')[amenity=hospital];';
+  } else if (type === "water") {
+    overpassQuery = 'node(around:2000,' + userPosition.lat + ',' + userPosition.lng + ')[amenity=drinking_water];node(around:2000,' + userPosition.lat + ',' + userPosition.lng + ')[natural=water];';
+  }
+
+  const url = "https://overpass-api.de/api/interpreter?data=[out:json];(" + overpassQuery + ");out;";
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      if (!data.elements.length) {
+        alert("Aucun lieu trouvé à proximité.");
+        return;
+      }
+
+      data.elements.forEach(element => {
+        const lat = element.lat;
+        const lon = element.lon;
+        const nom = element.tags.name || (type === 'hospital' ? "Hôpital" : "Point d'eau");
+
+        const icon = L.icon({
+          iconUrl: type === 'hospital' ? 'https://cdn-icons-png.flaticon.com/512/2965/2965567.png' : 'https://cdn-icons-png.flaticon.com/512/728/728093.png',
+          iconSize: [30, 30],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30]
+        });
+
+        const marker = L.marker([lat, lon], { icon: icon })
+          .addTo(map)
+          .bindPopup(`<strong>${nom}</strong><br><button onclick="tracerItineraire(${lat}, ${lon})">🧭 Itinéraire</button>`);
+        lieuxMarkers.push(marker);
+      });
+    })
+    .catch(err => {
+      console.error("Erreur avec Overpass API :", err);
+      alert("Erreur lors de la récupération des données.");
+    });
+  }
   </script>
 </body>
 </html>
