@@ -59,12 +59,14 @@
         }
     </style>
 </head>
+
+
 <body>
     <div class="login">
         <img src="inscrijpg.jpg" alt="login image" class="login__img">
 
         <form action="" id="inscriptionForm">
-            <h5 class="login__title">Inscription</h5>
+            <h5 class="login__title">Login</h5>
 
             <div class="login__content">
                 <div class="login__box">
@@ -107,29 +109,6 @@
 
             <button type="submit" class="btn" onclick="afficherMessage( Bienvenue )">Valider</button>
 
-
-
-        </form>
-        <form id="loginForm">
-            <h5 class="login__title"></h5>
-
-            <div class="login__box">
-                <i class="ri-user-3-line login__icon"></i>
-                <div class="form-group">
-                    <input type="email" required class="login__input" id="loginEmail" placeholder=" ">
-                    <label for="loginEmail" class="login__label"></label>
-                </div>
-            </div>
-
-            <div class="login__box">
-                <i class="ri-lock-2-line login__icon"></i>
-                <div class="form-group">
-                    <input type="password" required class="login__input" id="loginPassword" placeholder=" ">
-                    <label for="loginPassword" class="login__label">Mot de passe</label>
-                </div>
-            </div>
-
-            <button type="submit" class="btn">S'inscrire</button>
         </form>
 
     <!-- Modal pour la question -->
@@ -187,6 +166,6 @@
             if (!email || !password) { alert("Veuillez remplir tous les champs."); return; } signInWithEmailAndPassword(auth, email, password) .then((userCredential) => { alert("Connexion réussie !"); window.location.href = "info.html"; }) .catch((error)=>
             { alert("Erreur de connexion : " + error.message); }); });
         </script>
-    </script>
+    
 </body>
 </html>
