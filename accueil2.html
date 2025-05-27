@@ -293,6 +293,14 @@ Nous vous contacterons bientôt au ${telephone} ou par email à ${email}.`;
       document.getElementById('confirmationMessage').textContent = "Veuillez remplir tous les champs.";
     }
   });
+  
+function incrementArticlesLus() {
+  let count = parseInt(localStorage.getItem('articlesLus') || '0');
+  count++;
+  localStorage.setItem('articlesLus', count.toString());
+  alert("Article marqué comme lu !");
+}
+
 </script>
 
 </body>
