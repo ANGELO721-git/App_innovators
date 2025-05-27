@@ -168,7 +168,18 @@
         thankYouMessage.classList.add('hidden');
       }, 3000);
     }
-  
+  // Initialiser les compteurs si non existants
+if (localStorage.getItem('articlesLus') === null) {
+  localStorage.setItem('articlesLus', '0');
+}
+if (localStorage.getItem('quizCompletes') === null) {
+  localStorage.setItem('quizCompletes', '0');
+}
+
+// Afficher les compteurs dans le tableau de bord
+document.getElementById('quizCountDashboard').textContent = localStorage.getItem('articlesLus');
+document.getElementById('challengesCompletedDashboard').textContent = localStorage.getItem('quizCompletes');
+
 </script>
 </body>
 </html>
