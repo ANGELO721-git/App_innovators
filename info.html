@@ -56,9 +56,9 @@
     
    <!-- Bouton quiz centré -->
 <div class="mt-9 p-6 flex justify-center">
-  <a href="mise en situation.html" class="bg-blue-600 text-white px-6 py-4 rounded-lg text-center hover:bg-blue-700 transition flex items-center justify-center">
+  <button onclick="incrementQuizCompletes()"> <a href="mise en situation.html" class="bg-blue-600 text-white px-6 py-4 rounded-lg text-center hover:bg-blue-700 transition flex items-center justify-center">
     <i class="fas fa-question-circle mr-3"></i> Commencer le quiz d’aujourd’hui
-  </a>
+  </a></button>
   <a href="" class="bg--600 text-white px-6 py-4 rounded-lg text-center hover:bg-white-700 transition flex items-center justify-center">
     <i class="fas fa-question-circl mr-9"></i> 
   </a>
@@ -179,6 +179,16 @@ if (localStorage.getItem('quizCompletes') === null) {
 // Afficher les compteurs dans le tableau de bord
 document.getElementById('quizCountDashboard').textContent = localStorage.getItem('articlesLus');
 document.getElementById('challengesCompletedDashboard').textContent = localStorage.getItem('quizCompletes');
+
+
+
+function incrementQuizCompletes() {
+  let count = parseInt(localStorage.getItem('quizCompletes') || '0');
+  count++;
+  localStorage.setItem('quizCompletes', count.toString());
+  alert("Quiz complété !");
+}
+
 
 </script>
 </body>
