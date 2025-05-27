@@ -119,7 +119,7 @@
         </div>
     </div>
 
-    <script>
+    <script type="module">
         document.getElementById('inscriptionForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -152,7 +152,7 @@
             localStorage.setItem('userInfo', JSON.stringify(userInfo));
             window.location.href = 'info.html'; // Redirige vers la page profil
         }
-        <script type="module">
+        
             import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js"; import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js"; import { getDatabase,
             ref, set } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js"; const firebaseConfig = { apiKey: "AIzaSyBu6ITVj8ubtx0BuqEGF5_YUETuTolY9Fs", authDomain: "inscriptionetconnexion-82356.firebaseapp.com", projectId: "inscriptionetconnexion-82356",
             storageBucket: "inscriptionetconnexion-82356.appspot.com", messagingSenderId: "688352080824", appId: "1:688352080824:web:b0b029da1cd905807ed54d", measurementId: "G-L005HQ97Y0", databaseURL: "https://inscriptionetconnexion-82356-default-rtdb.firebaseio.com"
